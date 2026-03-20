@@ -11,12 +11,12 @@ except FileNotFoundError:
     exit()
 
 # 2. Tamaño del dataset
-print("📊 TAMAÑO DEL DATASET:")
+print("TAMAÑO DEL DATASET:")
 print(f"Total de restaurantes (filas): {df.shape[0]}")
 print(f"Total de variables (columnas): {df.shape[1]}\n")
 
 # 3. Análisis de Nulos (Vital para tu memoria del proyecto)
-print("⚠️ VALORES NULOS POR COLUMNA:")
+print("VALORES NULOS POR COLUMNA:")
 nulos = df.isnull().sum()
 nulos_porcentaje = (nulos / len(df)) * 100
 resumen_nulos = pd.DataFrame({'Total Nulos': nulos, 'Porcentaje (%)': nulos_porcentaje})
@@ -25,11 +25,11 @@ print(resumen_nulos[resumen_nulos['Total Nulos'] > 0].sort_values(by='Porcentaje
 print("\n")
 
 # 4. Tipos de datos
-print("🧬 TIPOS DE DATOS DE LAS COLUMNAS:")
+print("TIPOS DE DATOS DE LAS COLUMNAS:")
 print(df.dtypes)
 print("\n")
 
 # 5. Muestra de la primera fila (para ver qué pinta tienen los datos)
-print("🔍 EJEMPLO DE UN REGISTRO (Fila 1):")
+print("EJEMPLO DE UN REGISTRO (Fila 1):")
 print(df.iloc[0])
 print("\n--- FIN DE LA RADIOGRAFÍA ---")
