@@ -64,7 +64,11 @@ Este dataset contiene la información de más de un millón de restaurantes euro
 
 - `keywords`: Palabras clave más repetidas extraídas automáticamente de las reseñas.
 
+## EDA:
 
+Para saber qué *tasks* deberemos incluir en el **pipeline**, nuestro primer paso será investigar los datos con el fin de entenderlos, gestionar valores atípicos y nulos, ver posibles transformaciones o reducciones de dimensionalidad, entre otras cosas.
+
+Para ello, hemos creado un archivo `ipynb` para poder comentar todos los pasos y realizarlos en scripts de python.
 
 
 
