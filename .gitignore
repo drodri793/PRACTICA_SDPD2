@@ -1,0 +1,10 @@
+# Entornos virtuales de Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Datos pesados (No se suben nunca a Git)
+*.csv
+
+# Logs generados por Airflow
+airflow/logs/
