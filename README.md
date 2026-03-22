@@ -8,9 +8,7 @@ Como objetivo ene esta práctica tenemos la creación de un *pipeline* en Airflo
 
 Como buena práctica, dejaremos el enlace aquí para dar crédito al autor y que se tenga acceso a la descarga de los datos:
 
-$$
 https://www.kaggle.com/datasets/stefanoleone992/tripadvisor-european-restaurants/data
-$$
 
 ## DATOS: TripAdvisor European restaurants
 
@@ -76,11 +74,6 @@ Para ello, hemos creado un archivo `ipynb` para poder comentar todos los pasos y
 
 
 
-
-
-
-
-Para empezar hemos creado una variable timestamp, ya que nuestro dataset no la contenía. Esta variable es simplemente para poder simular un procesamiento de datos en streaming, pero no se puede utilizar como una vbariable literal. Esta variable empieza en "01-01-2021 00:00:00" y va sumando un segundo a cada observación, sin que ninguna observación tenga el mismo timestamp.
 
 
 
