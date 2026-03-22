@@ -1,5 +1,104 @@
 # PRACTICA_SDPD2
 
-El objetio del trabajo es crear un DAG de operaciones de limpieza y preparación de datos a través de airflow.
+Este archivo muestra y detalla los procesos y problemas con los que nos hemos ido tomando durante la realización de la práctica.
+
+## OBJETIVO
+
+Como objetivo ene esta práctica tenemos la creación de un *pipeline* en Airflow que automatice la limpieza y el proceso **ETL** del dataset sacado de Tripadvisor.
+
+Como buena práctica, dejaremos el enlace aquí para dar crédito al autor y que se tenga acceso a la descarga de los datos:
+
+$$
+https://www.kaggle.com/datasets/stefanoleone992/tripadvisor-european-restaurants/data
+$$
+
+## DATOS: TripAdvisor European restaurants
+
+Este dataset contiene la información de más de un millón de restaurantes europeos extraída de TripAdvisor. A continuación, se detallan las variables de las 42 columnas principales, agrupadas por su naturaleza lógica:
+
+**1. Identificación y Ubicación**
+- `restaurant_link`: URL única del restaurante en la plataforma. Actúa como identificador único principal.
+
+- `restaurant_name`: Nombre comercial del restaurante.
+
+- `original_location`: Ubicación en texto libre tal y como aparece en la web (suele incluir ciudad, región y país).
+
+- `country` / `region` / `province` / `city`: Desglose geográfico estructurado. Son variables categóricas clave para la agrupación de los datos.
+
+- `address`: Dirección física completa del local.
+
+`latitude` / `longitude`: Coordenadas geográficas exactas. (Críticas para visualizaciones geoespaciales).
+
+**2. Características del Restaurante**
+- `price_level`: Nivel de precio categorizado por la plataforma (suele representarse como $, $$-$$$, $$$$).
+
+- `price_range`: Rango de precios estimado en formato texto.
+
+- `meals`: Tipos de servicio de comida que ofrecen (ej. Desayuno, Comida, Cena, Brunch).
+
+- `cuisines`: Tipo de cocina o gastronomía principal del local (Italiana, Mediterránea, Asiática, etc.).
+
+- `special_diets`: Opciones dietéticas especiales mencionadas en el perfil.
+
+- `features`: Características de infraestructura del local (Tiene terraza, acepta tarjetas, acceso para sillas de ruedas, Wi-Fi, etc.).
+
+- `vegetarian_friendly` / `vegan_options` / `gluten_free`: Indicadores binarios (Y/N) que confirman si el local ofrece este tipo de menús adaptados.
+
+**3. Puntuaciones y Popularidad (Métricas de Calidad)**
+- `avg_rating`: Puntuación media global otorgada por los usuarios (rango de 1.0 a 5.0 burbujas).
+
+- `total_reviews_count`: Volumen total de opiniones registradas.
+
+- `popularity_detailed`: Ranking exacto del restaurante dentro de su ciudad (ej. "Nº 3 de 500 restaurantes en Madrid").
+
+- `excellent` / `very_good` / `average` / `poor` / `terrible`: Desglose del número absoluto de votos que el local ha recibido en cada nivel de satisfacción.
+
+- `food` / `service` / `value` / `atmosphere`: Puntuación desglosada (de 1.0 a 5.0) en los cuatro pilares fundamentales: Comida, Servicio, Relación Calidad-Precio (Value) y Atmósfera.
+
+**4. Horarios y Metadatos**
+- `original_open_hours`: Cadena de texto en bruto con los horarios de apertura semanales.
+
+- `open_days_per_week`: Número de días a la semana que el establecimiento está abierto al público.
+
+- `open_hours_per_week`: Total de horas de operatividad a la semana.
+
+- `keywords`: Palabras clave más repetidas extraídas automáticamente de las reseñas.
+
+
+
+
+
+
+
+
+
+
+
+
 
 Para empezar hemos creado una variable timestamp, ya que nuestro dataset no la contenía. Esta variable es simplemente para poder simular un procesamiento de datos en streaming, pero no se puede utilizar como una vbariable literal. Esta variable empieza en "01-01-2021 00:00:00" y va sumando un segundo a cada observación, sin que ninguna observación tenga el mismo timestamp.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****
+Autores:
+
+- Alonso Rescalvo
+- Diego
+- Adrián Gutiérrez Toledo
