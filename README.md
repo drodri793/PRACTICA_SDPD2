@@ -66,6 +66,8 @@ Este dataset contiene la información de más de un millón de restaurantes euro
 
 Para saber qué *tasks* deberemos incluir en el **pipeline**, nuestro primer paso será investigar los datos con el fin de entenderlos, gestionar valores atípicos y nulos, ver posibles transformaciones o reducciones de dimensionalidad, entre otras cosas.
 
+Para realizar un EDA, antes debemos concretar cuales serán los objetivos de este, tras balancear diferentes preguntas y cuestiones acerca de la **dirección** en la que enfocaremos nuestra práctica, como grupo hemos decidido que enfocaremos el estudio en crear un "ranking" de paises con mejores restaurantes calidad-precio.
+
 Para ello, hemos creado un archivo `ipynb` para poder comentar todos los pasos y realizarlos en scripts de python.
 
 
