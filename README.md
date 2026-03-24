@@ -96,6 +96,6 @@ Para ello, hemos creado un archivo `ipynb` para poder comentar todos los pasos y
 ****
 Autores:
 
-- Alonso Rescalvo
-- Diego
+- Alonso Rescalvo Casas
+- Diego Rodríguez Monteagudo
 - Adrián Gutiérrez Toledo
