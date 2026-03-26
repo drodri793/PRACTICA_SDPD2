@@ -4,7 +4,9 @@ Este archivo muestra y detalla los procesos y problemas con los que nos hemos id
 
 ## OBJETIVO
 
-Como objetivo ene esta práctica tenemos la creación de un *pipeline* en Airflow que automatice la limpieza y el proceso **ETL** del dataset sacado de Tripadvisor.
+Como objetivo en esta práctica tenemos la creación de un *pipeline* en Airflow que automatice la limpieza y el proceso **ETL** del dataset sacado de Tripadvisor.
+
+Tras balancear diferentes preguntas y cuestiones acerca de la **dirección** en la que enfocaremos nuestra práctica, como grupo hemos decidido que enfocaremos el estudio en crear un "ranking" de paises con mejores restaurantes calidad-precio.
 
 Como buena práctica, dejaremos el enlace aquí para dar crédito al autor y que se tenga acceso a la descarga de los datos:
 
@@ -65,8 +67,6 @@ Este dataset contiene la información de más de un millón de restaurantes euro
 ## EDA:
 
 Para saber qué *tasks* deberemos incluir en el **pipeline**, nuestro primer paso será investigar los datos con el fin de entenderlos, gestionar valores atípicos y nulos, ver posibles transformaciones o reducciones de dimensionalidad, entre otras cosas.
-
-Para realizar un EDA, antes debemos concretar cuales serán los objetivos de este, tras balancear diferentes preguntas y cuestiones acerca de la **dirección** en la que enfocaremos nuestra práctica, como grupo hemos decidido que enfocaremos el estudio en crear un "ranking" de paises con mejores restaurantes calidad-precio.
 
 Para ello, hemos creado un archivo `ipynb` para poder comentar todos los pasos y realizarlos en scripts de python.
 
