@@ -1,0 +1,17 @@
+# ==========================================
+# CONFIGURACIÓN DEL DAG DE TRIPADVISOR
+# ==========================================
+
+[paths]
+# Rutas absolutas a los archivos de datos
+raw_csv = "/home/vboxuser/SDPD2/airflow/dags/tripadvisor_european_restaurants.csv"
+processed_parquet = "/home/vboxuser/SDPD2/airflow/dags/tripadvisor_clean_ranking.parquet"
+
+[kafka]
+# Configuración de la cola de mensajes
+bootstrap_servers = "localhost:9092"
+topic_name = "restaurantes_procesados"
+
+[processing]
+# Parámetros de negocio para el filtrado
+min_reviews_count = 30
