@@ -1,6 +1,5 @@
 import json
-import tomllib # Librería nativa de Python 3.11+ para leer .toml
-import pandas as pd
+import tomllib
 from datetime import datetime
 from airflow.decorators import dag, task
 from kafka import KafkaProducer

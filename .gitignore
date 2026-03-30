@@ -8,3 +8,5 @@ __pycache__/
 
 # Logs generados por Airflow
 airflow/logs/
+
+Cosas.md
