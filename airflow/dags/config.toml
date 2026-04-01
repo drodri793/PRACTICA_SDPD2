@@ -4,8 +4,8 @@
 
 [paths]
 # Rutas absolutas a los archivos de datos
-raw_csv = "/home/vboxuser/SDPD2/airflow/dags/tripadvisor_european_restaurants.csv"
-processed_parquet = "/home/vboxuser/SDPD2/airflow/dags/tripadvisor_clean_ranking.parquet"
+raw_csv = "/otp/airflow/dags/tripadvisor_european_restaurants.csv"
+processed_parquet = "/otp/airflow/dags/tripadvisor_clean_ranking.parquet"
 
 [kafka]
 # Configuración de la cola de mensajes

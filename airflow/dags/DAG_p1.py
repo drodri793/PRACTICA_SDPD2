@@ -1,5 +1,10 @@
+try:
+    import tomllib
+except ModuleNotFoundError:
+    import tomli as tomllib
+
 import json
-import tomllib
+import pandas as pd
 from datetime import datetime
 from airflow.decorators import dag, task
 from kafka import KafkaProducer
@@ -8,8 +13,8 @@ from kafka import KafkaProducer
 # FUNCIÓN AUXILIAR: Cargar Configuración
 # ==========================================
 def load_config():
-    # Asegúrate de que esta ruta coincida con donde guardaste tu config.toml
-    with open("/home/vboxuser/SDPD2/airflow/dags/config.toml", "rb") as f:
+    #Dado que el DAG se ejecutará en un entorno controlado, podemos permitirnos cargar el config directamente desde un archivo TOML local. Esto nos da flexibilidad para ajustar parámetros sin tocar el código.
+    with open("/opt/airflow/dags/config.toml", "rb") as f:
         return tomllib.load(f)
 
 # ==========================================
@@ -45,7 +50,7 @@ def tripadvisor_pipeline():
         # Guardamos en un archivo temporal ultrarrápido y devolvemos la ruta
         tmp_path = "/tmp/t1_prepared.parquet"
         df.to_parquet(tmp_path, engine="pyarrow")
-        print(f"✅ Datos limpios guardados en: {tmp_path}")
+        print(f"Datos limpios guardados en: {tmp_path}")
         
         return tmp_path
 
@@ -60,8 +65,6 @@ def tripadvisor_pipeline():
         # Tratamiento de variables categóricas (mapeo de euros)
         mapa_precios = {'€': 1, '€€ - €€€': 2, '€€€€': 3}
         df['price_level_num'] = df['price_level'].map(mapa_precios)
-        
-        # Transformación de variables: Creación del KPI
         df['score_calidad_precio'] = df['avg_rating'] / df['price_level_num']
         
         # Filtro de fiabilidad desde el TOML
@@ -71,7 +74,7 @@ def tripadvisor_pipeline():
         # Guardar resultado final
         final_path = config["paths"]["processed_parquet"]
         df.to_parquet(final_path, engine="pyarrow")
-        print(f"✅ Datos transformados guardados en: {final_path}")
+        print(f"Datos transformados guardados en: {final_path}")
         
         return final_path
 
@@ -85,7 +88,7 @@ def tripadvisor_pipeline():
         
         # Agrupamos la info para no saturar Kafka enviando un millón de filas.
         # Enviamos el Top 10 de países con mejor Calidad-Precio
-        ranking = df.groupby('country')['score_calidad_precio'].mean().sort_values(ascending=False).head(10)
+        ranking = df.groupby('country')['score_calidad_precio'].mean().sort_values(ascending=False)
         
         # Construimos el mensaje JSON
         mensaje = {
@@ -102,7 +105,7 @@ def tripadvisor_pipeline():
         
         producer.send(config["kafka"]["topic_name"], value=mensaje)
         producer.flush()
-        print(f"🚀 Mensaje enviado a Kafka: {mensaje}")
+        print(f"Mensaje enviado a Kafka: {mensaje}")
 
     # ==========================================
     # SECUENCIA DE EJECUCIÓN DEL DAG
