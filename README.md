@@ -42,7 +42,7 @@ Este dataset contiene la información de más de un millón de restaurantes euro
 
 - `features`: Características de infraestructura del local (Tiene terraza, acepta tarjetas, acceso para sillas de ruedas, Wi-Fi, etc.).
 
-- `vegetarian_friendly` / `vegan_options` / `gluten_free`: Indicadores binarios (Y/N) que confirman si el local ofrece este tipo de menús adaptados.
+- `vegetarian_friendly`  / `vegan_options` / `gluten_free`: Indicadores binarios (Y/N) que confirman si el local ofrece este tipo de menús adaptados.
 
 **3. Puntuaciones y Popularidad (Métricas de Calidad)**
 - `avg_rating`: Puntuación media global otorgada por los usuarios (rango de 1.0 a 5.0 burbujas).
@@ -69,6 +69,34 @@ Este dataset contiene la información de más de un millón de restaurantes euro
 Para saber qué *tasks* deberemos incluir en el **pipeline**, nuestro primer paso será investigar los datos con el fin de entenderlos, gestionar valores atípicos y nulos, ver posibles transformaciones o reducciones de dimensionalidad, entre otras cosas.
 
 Para ello, hemos creado un archivo `ipynb` para poder comentar todos los pasos y realizarlos en scripts de python.
+
+## AIRFLOW
+
+### TASK 0: CARGAR CONFIGURACIÓN (FUNCIÓN AUXILIAR)
+
+En este bloque inicial preparamos la base para realizar correctamente el flujo de trabajo. Primero definimos una función auxiliar para cargar la configuración del proyecto desde un archivo externo, lo que nos permite separar los parámetros del código principal.
+
+Después declaramos el DAG de Airflow, que será el encargado de orquestar el proceso ETL. En esta definición establecemos su identificador, indicamos que su ejecución será manual por el momento, fijamos una fecha de inicio y desactivamos las ejecuciones para evitar que se lancen procesos pendientes de fechas anteriores.
+
+En conjunto, este fragmento deja creada la estructura general del pipeline antes de realizar las tareas de extracción, transformación y carga de datos (ETL).
+
+### TASK 1: EXTRAER Y PREPARAR
+
+En este fragmento definimos la primera tarea del pipeline, en la que realizamos la extracción y preparación de los datos. Para ello cargamos la configuración del proyecto, hecha en la task 0, y leemos el archivo CSV desde la ruta correcta. A continuación, nos quedamos únicamente con las variables más relevantes para el análisis, como el nombre del restaurante, el país, la ciudad, la valoración media, el nivel de precio y el número total de reseñas.
+
+Después realizamos una limpieza básica eliminando los valores nulos, de forma que trabajemos solo con datos completos. Una vez limpiado el conjunto de datos, lo guardamos en un archivo temporal en formato Parquet, que resulta más eficiente para las siguientes etapas del flujo de trabajo. Por último, la tarea devuelve la ruta donde se encuentra ese archivo temporal, lo que permite que las tareas posteriores continúen el procesamiento a partir de unos datos ya filtrados y limpios.
+
+### TASK 2: TRANSFORMAR
+
+En esta segunda tarea del pipeline de flujo de trabajo realizamos la transformación de los datos que hemos limpiado y filtrado en la anterior tarea. Para ello cargamos el archivo temporal generado en la fase anterior y aplicamos una serie de operaciones orientadas a mejorar su utilidad. En primer lugar, transformamos la variable categórica asociada al nivel de precio en una representación numérica, lo que nos permite trabajar con ella de forma más sencilla.
+
+A continuación, construimos una nueva variable derivada que relaciona la valoración media del restaurante con su nivel de precio, obteniendo así un indicador de calidad-precio. Después aplicamos un filtro de fiabilidad definido en el archivo de configuración, conservando únicamente aquellos registros que superan un número mínimo de reseñas. Finalmente, guardamos el conjunto de datos transformado en la ruta final que hemos indicado en la configuración, dejándolo preparado para su uso en etapas posteriores del proyecto.
+
+### TASK 3: CARGA EN KAFKA
+
+En esta tercera tarea del pipeline realizamos la fase de carga, enviando a Kafka un resumen de la información ya transformada. Para ello leemos el fichero procesado y, en lugar de enviar todos los registros de forma individual, agrupamos los datos por país para generar un resultado más manejable. En concreto, calculamos un ranking en función del indicador calidad-precio, lo que nos permite identificar los países mejor posicionados según esta métrica.
+
+A continuación, construimos un mensaje en formato JSON que incluye información sobre el evento ejecutado, la ruta del archivo procesado y el ranking obtenido. Finalmente, nos conectamos a Kafka utilizando la configuración definida en el proyecto y enviamos dicho mensaje al tópico correspondiente. De este modo, dejamos disponible el resultado del pipeline para su consumo por otros sistemas o procesos.
 
 
 
