@@ -1,6 +1,6 @@
 # PRACTICA_SDPD2
 
-Este archivo muestra y detalla los procesos y problemas con los que nos hemos ido tomando durante la realización de la práctica.
+Este archivo muestra y detalla los procesos y problemas con los que nos hemos ido encontrando durante la realización de la práctica.
 
 ## OBJETIVO
 
