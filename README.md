@@ -98,6 +98,7 @@ En esta tercera tarea del pipeline realizamos la fase de carga, enviando a Kafka
 
 A continuación, construimos un mensaje en formato JSON que incluye información sobre el evento ejecutado, la ruta del archivo procesado y el ranking obtenido. Finalmente, nos conectamos a Kafka utilizando la configuración definida en el proyecto y enviamos dicho mensaje al tópico correspondiente. De este modo, dejamos disponible el resultado del pipeline para su consumo por otros sistemas o procesos.
 
+<img width="701" height="146" alt="image" src="https://github.com/user-attachments/assets/94c39143-2412-4769-8e65-50e06f6bd17e" />
 
 
 
