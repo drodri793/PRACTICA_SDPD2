@@ -1,0 +1,8 @@
+RESUMEN DE VENTAS (MODO COMPLETE)
+-----------------------------------
+PRODUCTO 		| CANTIDAD TOTAL
+-----------------------------------
+t-shirts 		| 2
+alarm clock 		| 2
+gift card 		| 4
+batteries 		| 2
