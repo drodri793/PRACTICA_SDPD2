@@ -65,6 +65,4 @@ query2 = conteo_df.writeStream \
     .start()
 
 # 3. Mantener el script corriendo hasta que lo paremos manualmente
-print("Las consultas se están ejecutando. Revisa los archivos salida1.txt y salida2.txt.")
-print("Pulsa Ctrl+C para detener el proceso.")
 spark.streams.awaitAnyTermination()
